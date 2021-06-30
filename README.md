@@ -1,1 +1,1 @@
----softverski alati  CRUD aplikacija ---
+---softverski alati  CRUD aplikacija  ----
