@@ -1,8 +1,8 @@
-(ns domain.order
+(ns domain.orders
     (:require [schema.core :as sch]
               [ring.swagger.schema :refer [coerce!]]))
   
-  (sch/defschema Order {
+  (sch/defschema Orders {
     :OrderID                    Integer
     :TotalPayment               Double
     :CustomerID                 Integer
@@ -10,4 +10,4 @@
     :TotalOrderOfSameProduct    Integer
   })
   
-  (sch/defschema NewOrder (dissoc Order :OrderID))
+  (sch/defschema NewOrder (dissoc Orders :OrderID))

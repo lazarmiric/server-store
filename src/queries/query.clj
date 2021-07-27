@@ -48,5 +48,34 @@
 
 
 
+  (defentity orders)
 
-  
+              (defn get-order [OrderID]
+                  (first
+                     (select orders
+                       (where {:OrderID [= OrderID]} )
+                        (limit 1))))
+      
+              
+      
+                      (defn add-order [NewOrder]
+                          (def customerExist (get-customer (get NewOrder :CustomerID)))
+                          (def productExist (get-product (get NewOrder :ProductID)))
+                            (if customerExist (
+                              if productExist ((def newOrder(insert orders
+                                    (values {
+                                      :TotalPayment (get NewOrder :TotalPayment)
+                                      :CustomerID (get NewOrder :CustomerID)
+                                      :ProductID (get NewOrder :ProductID)
+                                      :TotalOrderOfSameProduct (get NewOrder :TotalOrderOfSameProduct)
+                                    })
+                                  ))
+                                  (def newOrderID (get newOrder :generated_key))
+                                  (get-order newOrderID)
+                                )    
+                                "Product does not exist!"   
+                            )                
+                          "Customer does not exist!"
+                          )
+                      )
+      
