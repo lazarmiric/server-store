@@ -56,6 +56,16 @@
       )
     )
 
+    (DELETE "/:id" []
+      :summary "Delete customer."
+      :path-params [id :- schema/Num]
+      (def deletedCustomer (query/delete-customer id))
+      (if (= (type deletedCustomer) java.lang.String) 
+        (bad-request deletedCustomer)
+        (ok nil) 
+      )
+    )
+
 
 
   
@@ -69,6 +79,23 @@
       :summary "Get product by id."
       (def productByID (query/get-product id))
       (if productByID (ok productByID) (not-found,"Product_does_not_exist!") )
+    )
+
+    (GET "/" []
+      :return [Product]
+      :summary "Get all products"
+      (ok (query/get-products)))
+
+    (PUT "/:id" []
+      :summary "Update product price."
+      :path-params [id :- schema/Num]
+      :body [updatedProduct NewProduct]
+      (def updateRes (query/update-product id updatedProduct))
+      (def getProductByID (query/get-product id))
+      (if (= (type updateRes) java.lang.Integer) 
+        (ok {:NewProduct getProductByID}) 
+        (bad-request updateRes)
+      )
     )
 
 
@@ -93,6 +120,16 @@
     (if (= (type addOrder) java.lang.String) 
       (bad-request addOrder)
       (ok addOrder) 
+    )
+  )
+
+  (DELETE "/:id" []
+    :summary "Delete order."
+    :path-params [id :- schema/Num]
+    (def deletedOrder (query/delete-order id))
+    (if (= (type deletedOrder) java.lang.String) 
+      (bad-request deletedOrder)
+      (ok nil) 
     )
   )
 

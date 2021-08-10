@@ -1,6 +1,7 @@
 (ns domain.product_detail
     (:require [schema.core :as sch]
               [ring.swagger.schema :refer [coerce!]]))
+
   
   (sch/defschema ProductDetail {
     :ProductDetailID       Integer

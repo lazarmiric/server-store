@@ -36,9 +36,19 @@
                   )
                 )
 
-  ; Product 
+    (defn delete-customer[CustomerID]
+        (def customerByID (get-customer CustomerID))
+            (if customerByID (delete customer            
+            (where {:CustomerID [= CustomerID]}))                  
+        "Customer does not exist!"
+      )
+    )
 
-  (defentity product)
+
+  ; Product 
+ ; (defentity product)
+
+  ;(defentity product_detail)
 
     (defn get-product [ProductID]
          (first
@@ -47,6 +57,28 @@
               (limit 1))))
 
 
+   (defn get-products []
+    (select product
+        (fields :product.ProductID :product.ProductName :product.ProductType :product.Price :product_detail.Brand :product_detail.CountryOfOrigin)
+        (join product_detail (= :product_detail.ProductDetailID :ProductDetailID))
+        )
+    )
+
+                      
+
+   (defn update-product [ProductID updatedProduct]
+        (def productByID (get-product ProductID))
+                (if productByID (update product
+                      (set-fields {
+                        :Price (get updatedProduct :Price)
+                      })
+                      (where {:ProductID [= ProductID]}))                  
+                  "Product does not exist!"
+                )
+              )
+
+
+  ; Orders 
 
   (defentity orders)
 
@@ -78,4 +110,15 @@
                           "Customer does not exist!"
                           )
                       )
+
+
+                      (defn delete-order[OrderID]
+                        (def orderByID (get-order OrderID))
+                            (if orderByID (delete orders            
+                            (where {:OrderID [= OrderID]}))                  
+                        "Order does not exist!"
+                      )
+                    )
       
+
+       
