@@ -98,6 +98,16 @@
       )
     )
 
+    (DELETE "/:id" []
+      :summary "Delete product."
+      :path-params [id :- schema/Num]
+      (def deletedProduct (query/delete-product id))
+      (if (= (type deletedProduct) java.lang.String) 
+        (bad-request deletedProduct)
+        (ok nil) 
+      )
+    )
+
 
   )
 
