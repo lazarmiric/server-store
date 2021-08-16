@@ -23,4 +23,16 @@
      (is (= 10000.0 (exist-order :TotalPayment)))
     )))
 
+(deftest delete-customer
+   (testing "Delete customer"
+    (is (= 1 (query/delete-customer 17)))))
+    
+    (testing "Delete customer does not exist"
+      (is (= "Customer does not exist!" (query/delete-customer 15))))
+
+(deftest update-product
+ (testing "Updates product price"
+  (def productPrice {:Price 1500})
+  (query/update-product 1 productPrice)
+  (is (= "S10" (:ProductName (query/get-product 1))))))
        

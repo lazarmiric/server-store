@@ -82,14 +82,14 @@
     )
 
     (GET "/" []
-      :return [Product]
+      :return [ProductWithDetail]
       :summary "Get all products"
       (ok (query/get-products)))
 
     (PUT "/:id" []
       :summary "Update product price."
       :path-params [id :- schema/Num]
-      :body [updatedProduct NewProduct]
+      :body [updatedProduct UpdateProduct]
       (def updateRes (query/update-product id updatedProduct))
       (def getProductByID (query/get-product id))
       (if (= (type updateRes) java.lang.Integer) 

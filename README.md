@@ -25,8 +25,16 @@ Run next command in the root of the project.
 
 This command will start a server and open a Swagger API Documentation.
 
+![swagger documentation](https://i.ibb.co/MN8dM1W/swagger.png)
 ## Test
 
+Tests is in test\server\core_test.clj class. 
+Tests can be run by typing command:
+>.\lein test
+
+After running this command, if everything is OK, the following message will appear:
+>Ran 4 tests containing 4 assertions.
+0 failures, 0 errors.
 
 ## License
 Copyright © 2021 Lazar Miric

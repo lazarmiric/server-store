@@ -19,6 +19,21 @@
     :Price                   Double
   })
 
+  (sch/defschema ProductWithDetail {
+    :ProductID               Integer
+    :ProductName             String
+    :ProductType             String
+    :Price                   Double
+    :Brand                   String
+    :CountryOfOrigin         String
+  })
+
+  (sch/defschema UpdateProduct
+    {
+     :Price Double
+     })
+  
+
 
   
   (sch/defschema NewProduct (dissoc Product :ProductID))
